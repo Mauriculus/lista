@@ -1,13 +1,16 @@
 const lista = document.getElementById("lista");
 const itemInput = document.getElementById("itemInput");
 
+//transforma a string (vetor) em objetos de lista
 let itens = JSON.parse(localStorage.getItem("itens")) || [];
 
+//pega os itens da lista e transforma em vetor para salvar
 function salvarNoLocalStorage() {
   localStorage.setItem("itens", JSON.stringify(itens));
 }
-
+//função para salvar a lista
 function renderizarLista() {
+  //limpa a lista antes de adicionar todos os itens de novo
   lista.innerHTML = "";
 
   itens.forEach((item, index) => {
@@ -22,19 +25,21 @@ function renderizarLista() {
 
     const btnComprar = document.createElement("button");
     btnComprar.textContent = item.comprado ? "Desmarcar" : "Comprado";
-    btnComprar.onclick = () => {
+    //detecta o click no botão de comprado e executa a função que atualiza o local storage e a lista
+    btnComprar.addEventListener("click", () => {
       itens[index].comprado = !itens[index].comprado;
       salvarNoLocalStorage();
       renderizarLista();
-    };
+    });
 
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
-    btnRemover.onclick = () => {
+    //detecta o click no botão de remover e executa a função que atualiza o local storage e a lista
+    btnRemover.addEventListener("click", () => {
       itens.splice(index, 1);
       salvarNoLocalStorage();
       renderizarLista();
-    };
+    });
 
     botoes.appendChild(btnComprar);
     botoes.appendChild(btnRemover);
@@ -45,6 +50,7 @@ function renderizarLista() {
     lista.appendChild(li);
   });
 }
+
 
 function adicionarItem() {
   const nome = itemInput.value.trim();
@@ -57,5 +63,15 @@ function adicionarItem() {
   itemInput.value = "";
   itemInput.focus();
 }
+
+//cria o botão de adicionar um item na lista
+const btnAdicionar = document.getElementById("btnAdicionar");
+//detecta o click no botão adicionar e adiciona o item na lista
+btnAdicionar.addEventListener("click", adicionarItem);
+
+//detecta caso enter tenha sido clicado e adiciona um item na lista
+itemInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") adicionarItem();
+});
 
 renderizarLista();
