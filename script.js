@@ -64,14 +64,17 @@ function adicionarItem() {
   itemInput.focus();
 }
 
-document.getElementById("contador").innerHTML = localStorage.contadorclick
 function contarClick() {
+  //checha se tem algo no local storage
   if (localStorage.contadorclick) {
+    //se tiver ele transforma em numero e adiciona 1
     localStorage.contadorclick = Number(localStorage.contadorclick)+1;
   }
   else{
+    //se nao tiver ele cria e define como 1
     localStorage.contadorclick = 1
   }
+  //atualiza o contador com o numero no local storage
   document.getElementById("contador").innerHTML = localStorage.contadorclick
 }
 
