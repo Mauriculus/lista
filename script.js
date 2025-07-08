@@ -30,7 +30,7 @@ function renderizarLista() {
       itens[index].comprado = !itens[index].comprado;
       salvarNoLocalStorage();
       renderizarLista();
-    });
+    })
 
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
@@ -62,6 +62,17 @@ function adicionarItem() {
 
   itemInput.value = "";
   itemInput.focus();
+}
+
+document.getElementById("contador").innerHTML = localStorage.contadorclick
+function contarClick() {
+  if (localStorage.contadorclick) {
+    localStorage.contadorclick = Number(localStorage.contadorclick)+1;
+  }
+  else{
+    localStorage.contadorclick = 1
+  }
+  document.getElementById("contador").innerHTML = localStorage.contadorclick
 }
 
 //cria o botão de adicionar um item na lista
