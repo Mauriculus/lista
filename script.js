@@ -50,6 +50,7 @@ function renderizarLista() {
     lista.appendChild(li);
   });
 }
+renderizarLista()
 
 
 function adicionarItem() {
@@ -79,9 +80,16 @@ function contarClick() {
 }
 
 //se não existe nada no local storage define como false (claro)
-if (localStorage.tema !== true && localStorage.tema !== false) {
-  localStorage.tema = false;
+if (localStorage.tema !== "true" && localStorage.tema !== "false") {
+  localStorage.tema = "false";
 }
+
+if (localStorage.tema === "true") {
+  document.querySelectorAll("*").forEach(elemento => {
+    elemento.classList.add("escuro")
+  })
+}
+
 
 function trocarTema() {
   //se o tema é claro
