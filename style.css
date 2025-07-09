@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 600px;
   margin: 50px auto;
   background: white;
   padding: 20px;
@@ -62,4 +62,17 @@ li.comprado span {
 .botoes button {
   margin-left: 5px;
   border-radius: 3px;
+}
+
+.container button {
+  color: white;
+  background-color: #4266df;
+  border-radius: 10px;
+  padding: 5px 13px;
+  font-size: 16px;
+}
+
+.escuro{
+  background-color: #252525;
+  color: white
 }

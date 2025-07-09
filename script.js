@@ -78,6 +78,31 @@ function contarClick() {
   document.getElementById("contador").innerHTML = localStorage.contadorclick
 }
 
+//se não existe nada no local storage define como false (claro)
+if (localStorage.tema !== true && localStorage.tema !== false) {
+  localStorage.tema = false;
+}
+
+function trocarTema() {
+  //se o tema é claro
+  if (localStorage.tema === "false") {
+    //seleciona todos os elementos html e adiciona a classe escuro
+    document.querySelectorAll("*").forEach(elemento => {
+      elemento.classList.add("escuro");
+    });
+    //muda o status do tema pra escuro (true)
+    localStorage.tema = "true";
+  } else {
+    //se o tema é escuro, seleciona todos os elementos html e tira a classe escuro
+    document.querySelectorAll("*").forEach(elemento => {
+      elemento.classList.remove("escuro");
+    });
+    //muda o status do tema para claro (false)
+    localStorage.tema = "false";
+  }
+}
+
+
 //cria o botão de adicionar um item na lista
 const btnAdicionar = document.getElementById("btnAdicionar");
 //detecta o click no botão adicionar e adiciona o item na lista
