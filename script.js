@@ -65,6 +65,10 @@ function adicionarItem() {
   itemInput.focus();
 }
 
+function atualizarClique(){
+  document.getElementById("contador"). innerHTML = "Quantidade de cliques: " + localStorage.contadorclick
+}
+
 function contarClick() {
   //checha se tem algo no local storage
   if (localStorage.contadorclick) {
@@ -76,39 +80,56 @@ function contarClick() {
     localStorage.contadorclick = 1
   }
   //atualiza o contador com o numero no local storage
-  document.getElementById("contador").innerHTML = localStorage.contadorclick
+  atualizarClique()
 }
 
-//se não existe nada no local storage define como false (claro)
-if (localStorage.tema !== "true" && localStorage.tema !== "false") {
-  localStorage.tema = "false";
+//se não existe nada no local storage define como claro
+if (localStorage.tema !== "claro" && localStorage.tema !== "escuro" && localStorage.tema !== "rosa"){
+  localStorage.tema = "claro"
 }
 
-if (localStorage.tema === "true") {
-  document.querySelectorAll("*").forEach(elemento => {
-    elemento.classList.add("escuro")
+if (localStorage.tema === "escuro") {
+    document.querySelectorAll("*").forEach(elemento => {
+      elemento.classList.add("escuro")
   })
-}
+} else {
+  if(localStorage.tema === "rosa"){
+    document.querySelectorAll("*").forEach(elemento => {
+      elemento.classList.add("rosa")
+    })}
+  else{
+    document.querySelectorAll("*").forEach(elemento => {
+      elemento.classList.remove("rosa")
+      elemento.classList.remove("escuro")
+})}}    
+
 
 
 function trocarTema() {
   //se o tema é claro
-  if (localStorage.tema === "false") {
+  if (localStorage.tema === "claro") {
     //seleciona todos os elementos html e adiciona a classe escuro
     document.querySelectorAll("*").forEach(elemento => {
       elemento.classList.add("escuro");
     });
     //muda o status do tema pra escuro (true)
-    localStorage.tema = "true";
+    localStorage.tema = "escuro";
   } else {
-    //se o tema é escuro, seleciona todos os elementos html e tira a classe escuro
-    document.querySelectorAll("*").forEach(elemento => {
-      elemento.classList.remove("escuro");
-    });
-    //muda o status do tema para claro (false)
-    localStorage.tema = "false";
-  }
-}
+    if (tema === "escuro") {
+      //se o tema é escuro, seleciona todos os elementos html e tira a classe escuro
+      document.querySelectorAll("*").forEach(elemento => {
+        elemento.classList.remove("escuro");
+        elemento.classList.add("rosa")
+      });
+      //muda o status do tema para claro (false)
+      localStorage.tema = "rosa";
+    } else {
+      document.querySelectorAll("*").forEach(elemento => {
+        elemento.classList.remove("rosa")
+      })
+      localStorage.tema = "claro"
+    }
+  }}
 
 
 //cria o botão de adicionar um item na lista
