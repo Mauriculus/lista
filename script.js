@@ -1,5 +1,7 @@
 const lista = document.getElementById("lista");
 const itemInput = document.getElementById("itemInput");
+const btnMaisClique = document.getElementById("btnMaisClique")
+const btnTema = document.getElementById("temador")
 
 //transforma a string (vetor) em objetos de lista
 let itens = JSON.parse(localStorage.getItem("itens")) || [];
@@ -68,6 +70,9 @@ function adicionarItem() {
 function atualizarClique(){
   document.getElementById("contador"). innerHTML = "Quantidade de cliques: " + localStorage.contadorclick
 }
+atualizarClique()
+
+btnMaisClique.addEventListener("click", contarClick)
 
 function contarClick() {
   //checha se tem algo no local storage
@@ -83,53 +88,36 @@ function contarClick() {
   atualizarClique()
 }
 
-//se não existe nada no local storage define como claro
-if (localStorage.tema !== "claro" && localStorage.tema !== "escuro" && localStorage.tema !== "rosa"){
+if (localStorage.tema){
+} else{
   localStorage.tema = "claro"
 }
 
-if (localStorage.tema === "escuro") {
+btnTema.addEventListener("click", mudarTema)
+
+function mudarTema(){
+  if (localStorage.tema == "claro"){
     document.querySelectorAll("*").forEach(elemento => {
       elemento.classList.add("escuro")
-  })
-} else {
-  if(localStorage.tema === "rosa"){
-    document.querySelectorAll("*").forEach(elemento => {
-      elemento.classList.add("rosa")
-    })}
-  else{
-    document.querySelectorAll("*").forEach(elemento => {
-      elemento.classList.remove("rosa")
-      elemento.classList.remove("escuro")
-})}}    
-
-
-
-function trocarTema() {
-  //se o tema é claro
-  if (localStorage.tema === "claro") {
-    //seleciona todos os elementos html e adiciona a classe escuro
-    document.querySelectorAll("*").forEach(elemento => {
-      elemento.classList.add("escuro");
-    });
-    //muda o status do tema pra escuro (true)
-    localStorage.tema = "escuro";
-  } else {
-    if (tema === "escuro") {
-      //se o tema é escuro, seleciona todos os elementos html e tira a classe escuro
+      localStorage.tema = "escuro"
+    })
+  } else{
+    if (localStorage.tema == "escuro"){
       document.querySelectorAll("*").forEach(elemento => {
-        elemento.classList.remove("escuro");
         elemento.classList.add("rosa")
-      });
-      //muda o status do tema para claro (false)
-      localStorage.tema = "rosa";
-    } else {
-      document.querySelectorAll("*").forEach(elemento => {
-        elemento.classList.remove("rosa")
+        elemento.classList.remove("escuro")
+        localStorage.tema = "rosa"
       })
-      localStorage.tema = "claro"
+    } else{
+      document.querySelectorAll("*").forEach(elemento =>{
+        elemento.classList.remove("rosa")
+        elemento.classList.remove("escuro")
+        localStorage.tema = "claro"
+      })
     }
-  }}
+  }
+}
+mudarTema()
 
 
 //cria o botão de adicionar um item na lista
@@ -141,5 +129,7 @@ btnAdicionar.addEventListener("click", adicionarItem);
 itemInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") adicionarItem();
 });
+
+
 
 renderizarLista();
